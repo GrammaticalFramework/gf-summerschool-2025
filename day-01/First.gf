@@ -30,4 +30,8 @@ fun
   sun_CN : CN ;
   house_CN : CN ;
 
+-- additions to illustrate lexical operations
+  car_CN : CN ;
+  shine_V : V ;
+
 }

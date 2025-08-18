@@ -42,4 +42,16 @@ lin
   sun_CN = table {Sg => "sun" ; Pl => "suns"} ;
   house_CN = table {Sg => "house" ; Pl => "houses"} ;
 
+-- addition: operations for easier word inflection
+-- (to be continued on day 2)
+oper
+  regCN : Str -> Number => Str = \s ->
+    table {Sg => s ; Pl => s + "s"} ;
+  regV : Str -> Number => Str = \s ->
+    table {Sg => s + "s" ; Pl => s} ;
+
+lin
+  car_CN = regCN "car" ;
+  shine_V = regV "shine" ;
+  
 }
