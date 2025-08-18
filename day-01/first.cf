@@ -1,0 +1,17 @@
+S ::= NP VP ;
+NP ::= Det CN ;
+NP ::= PN ;
+VP ::= V ;
+VP ::= TV NP ;
+VP ::= "is" AP ;
+PN ::= "John" ;
+Det ::= "the" ;
+CN ::= "sun" ;
+V ::= "shines" ;
+V ::= "walks" ;
+TV ::= "loves" ;
+PN ::= "Mary" ;
+CN ::= AP CN ;
+AP ::= "warm" ;
+AP ::= "beautiful" ;
+
