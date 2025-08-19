@@ -19,7 +19,7 @@ abstract MicroLang = {
     CN ;     -- common noun (without determiner)    e.g. "red house"
     NP ;     -- noun phrase (subject or object)     e.g. "the red house"
     Det ;    -- determiner phrase                   e.g. "those"
-    Prep ;   -- predposition, or just case           e.g. "in", dative
+    Prep ;   -- preposition, or just case           e.g. "in", dative
     V ;      -- one-place verb                      e.g. "sleep" 
     V2 ;     -- two-place verb                      e.g. "love"
     A ;      -- one-place adjective                 e.g. "warm"
