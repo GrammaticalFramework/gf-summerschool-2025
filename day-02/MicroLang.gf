@@ -18,6 +18,7 @@ abstract MicroLang = {
     AP ;     -- adjectival phrase                   e.g. "warm"
     CN ;     -- common noun (without determiner)    e.g. "red house"
     NP ;     -- noun phrase (subject or object)     e.g. "the red house"
+    PN ;     -- proper noun                         e.g. "Paris"
     Det ;    -- determiner phrase                   e.g. "those"
     Prep ;   -- preposition, or just case           e.g. "in", dative
     V ;      -- one-place verb                      e.g. "sleep"
@@ -47,6 +48,7 @@ abstract MicroLang = {
 -- Noun
     DetCN     : Det -> CN -> NP ;       -- the man
     UsePron   : Pron -> NP ;            -- she
+    UsePN     : PN -> NP ;              -- Paris
     a_Det     : Det ;                   -- indefinite singular ---s
     aPl_Det   : Det ;                   -- indefinite plural   ---s
     the_Det   : Det ;                   -- definite singular   ---s

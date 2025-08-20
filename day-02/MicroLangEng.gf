@@ -1,6 +1,6 @@
 concrete MicroLangEng of MicroLang = open MicroResEng in {
     lincat
-        Prep, Adv, S, Utt  = {s : Str} ;
+        PN, Prep, Adv, S, Utt  = {s : Str} ;
         N, CN = Noun ;
         A, AP, Comp = Adjective ;
         Det = Determiner ;
@@ -14,6 +14,10 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
         PositA a = a ;
         AdjCN ap cn = {s = \\n => ap.s ++ cn.s ! n} ;
         UsePron p = p ;
+        UsePN pn = {
+            s = \\_ => pn.s ;
+            a = SVA III Sg
+        } ;
         DetCN det cn = {
             s = \\_ => det.s ++ cn.s ! det.n ;
             a = SVA III det.n
