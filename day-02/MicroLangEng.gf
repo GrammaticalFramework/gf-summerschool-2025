@@ -6,29 +6,29 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
         Det = Determiner ;
         Pron, NP = NounPhr ;
         V = Verb ;
-        V2 = Verb ; 
-        VP = {s: SVAgr => Str} ; 
+        V2 = Verb ;
+        VP = {s: SVAgr => Str} ;
 
-    lin 
+    lin
         UseN n = n ;
         PositA a = a ;
         AdjCN ap cn = {s = \\n => ap.s ++ cn.s ! n} ;
         UsePron p = p ;
         DetCN det cn = {
             s = \\_ => det.s ++ cn.s ! det.n ;
-            a = SVA III det.n 
+            a = SVA III det.n
         } ;
-        UseV v = { 
+        UseV v = {
             s = table {
                 (SVA III Sg) => v.s ! PresIIISg ;
-                _ => v.s ! Inf 
+                _ => v.s ! Inf
             }
         } ;
         ComplV2 v2 np = {
             s = let obj = np.s ! Acc in table {
                 (SVA III Sg) => v2.s ! PresIIISg ++ obj ;
-                _ => v2.s ! Inf ++ obj 
-            } 
+                _ => v2.s ! Inf ++ obj
+            }
         } ;
         UseComp ap = {
             s = table {
@@ -38,11 +38,16 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
             }
         } ;
         CompAP ap = ap ;
+        --    : NP -> Comp ;            -- a student
+        CompNP np = {s = np.s ! Acc} ;
+        --    : Adv -> Comp ;          -- between jobs
+        CompAdv adv = adv ;
+
         PredVPS np vp = {
             s = np.s ! Nom ++ vp.s ! np.a
         } ;
         UttNP np = {s = np.s ! Nom} ;
-        UttS s = s ; 
+        UttS s = s ;
         AdvVP vp adv = {s= \\sva => vp.s ! sva ++ adv.s } ;
         PrepNP p np = { s = p.s ++ np.s ! Acc } ;
 
@@ -55,7 +60,7 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
         heavily_Adv = {s = "heavily"} ;
         lightly_Adv = {s = "lightly"} ;
 
-        apple_N = mkN "apple" ; 
+        apple_N = mkN "apple" ;
         bird_N = mkN "bird" ;
         cat_N = mkN "cat" ;
         car_N = mkN "car" ;
@@ -100,25 +105,25 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
         } ;
 
         i_Pron = {
-            s = table { Nom => "I"; Acc => "me"}; 
+            s = table { Nom => "I"; Acc => "me"};
             a = SVA I Sg };
         youSg_Pron = {
-            s = table { Nom => "you"; Acc => "you"}; 
+            s = table { Nom => "you"; Acc => "you"};
             a = SVA II Sg };
         he_Pron = {
-            s = table { Nom => "he"; Acc => "him"}; 
+            s = table { Nom => "he"; Acc => "him"};
             a = SVA III Sg; };
         she_Pron = {
-            s = table { Nom => "she"; Acc => "her"}; 
+            s = table { Nom => "she"; Acc => "her"};
             a = SVA III Sg };
         we_Pron = {
-            s = table { Nom => "we"; Acc => "us"}; 
+            s = table { Nom => "we"; Acc => "us"};
             a = SVA I Pl};
         youPl_Pron = {
-            s = table { Nom => "you"; Acc => "you"}; 
+            s = table { Nom => "you"; Acc => "you"};
             a = SVA II Pl };
         they_Pron = {
-            s = table { Nom => "they"; Acc => "them"}; 
+            s = table { Nom => "they"; Acc => "them"};
             a = SVA III Pl } ;
 
 }

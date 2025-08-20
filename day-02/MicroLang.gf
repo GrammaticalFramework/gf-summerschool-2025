@@ -7,7 +7,7 @@ abstract MicroLang = {
 -----------------------------------------------------
   flags startcat=Utt ;
   cat
-  
+
 -- Common
     Utt ;    -- sentence, question, word...         e.g. "be quiet"
 
@@ -20,13 +20,13 @@ abstract MicroLang = {
     NP ;     -- noun phrase (subject or object)     e.g. "the red house"
     Det ;    -- determiner phrase                   e.g. "those"
     Prep ;   -- preposition, or just case           e.g. "in", dative
-    V ;      -- one-place verb                      e.g. "sleep" 
+    V ;      -- one-place verb                      e.g. "sleep"
     V2 ;     -- two-place verb                      e.g. "love"
     A ;      -- one-place adjective                 e.g. "warm"
     N ;      -- common noun                         e.g. "house"
     Pron ;   -- personal pronoun                    e.g. "she"
     Adv ;    -- adverbial phrase                    e.g. "in the house"
-    
+
   fun
 -- Phrase
     UttS      : S  -> Utt ;         -- he walks
@@ -38,8 +38,10 @@ abstract MicroLang = {
 -- Verb
     UseV      : V   -> VP ;             -- sleep
     ComplV2   : V2  -> NP -> VP ;       -- love it ---s
-    UseComp   : Comp  -> VP ;           -- be small
-    CompAP    : AP  -> Comp ;           -- small
+    UseComp   : Comp -> VP ;            -- be small
+    CompAP    : AP -> Comp ;            -- small
+    CompNP    : NP -> Comp ;            -- a student
+    CompAdv   : Adv -> Comp ;          -- between jobs
     AdvVP     : VP -> Adv -> VP ;       -- sleep here
 
 -- Noun
