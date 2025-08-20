@@ -1,12 +1,12 @@
-concrete MicroLangEng of MicroLang = {
+concrete MicroLangEng of MicroLang = open MicroResEng in {
     lincat
-        Prep, Adv = {s : Str} ;
+        Prep, Adv, S, Utt  = {s : Str} ;
         N, CN = Noun ;
         A, AP, Comp = Adjective ;
-        Det = {s : Str ; n: Number} ;
+        Det = Determiner ;
         Pron, NP = NounPhr ;
         V = Verb ;
-        V2 = Verb ;
+        V2 = Verb ; 
         VP = {s: SVAgr => Str} ; 
 
     lin 
@@ -30,6 +30,21 @@ concrete MicroLangEng of MicroLang = {
                 _ => v2.s ! Inf ++ obj 
             } 
         } ;
+        UseComp ap = {
+            s = table {
+                (SVA I Sg) => "am" ++ ap.s ;
+                (SVA III Sg) => "is" ++ ap.s ;
+                _ => "are" ++ ap.s
+            }
+        } ;
+        CompAP ap = ap ;
+        PredVPS np vp = {
+            s = np.s ! Nom ++ vp.s ! np.a
+        } ;
+        UttNP np = {s = np.s ! Nom} ;
+        UttS s = s ; 
+        AdvVP vp adv = {s= \\sva => vp.s ! sva ++ adv.s } ;
+        PrepNP p np = { s = p.s ++ np.s ! Acc } ;
 
         in_Prep = {s = "in"} ;
         on_Prep = {s = "on"} ;
@@ -104,48 +119,6 @@ concrete MicroLangEng of MicroLang = {
             a = SVA II Pl };
         they_Pron = {
             s = table { Nom => "they"; Acc => "them"}; 
-            a = SVA III Pl };
-
-    param
-        Number = Sg | Pl ;
-        Case = Nom | Acc ;
-        Person = I | II | III ;
-        SVAgr = SVA Person Number ;
-        VForm = PresIIISg | Inf ;
-    oper 
-        Noun : Type = { s : Number => Str } ;
-        Adjective : Type = {s : Str} ;
-        Verb : Type = {s: VForm => Str} ;
-        NounPhr : Type = {s : Case => Str ; a : SVAgr };
-        worstN : Str -> Str -> Noun = \child, children -> {
-            s = table {
-                Sg => child ;
-                Pl => children 
-            }
-        } ;
-        regN : Str -> Noun = \dog -> {
-            s = table {
-                Sg => dog ;
-                Pl => addS dog
-            }
-        } ;
-
-        mkV : Str -> Verb = \wait -> {
-            s = table {
-                PresIIISg => addS wait ; 
-                Inf => wait
-            }
-        } ;
-
-        addS : Str -> Str = \dog -> case dog of {
-            dish@(di + ("sh" | "ss" | "x" | "ch")) => dish + "es" ;
-            bab + "y" => bab + "ies" ;
-            _ => dog + "s"
-        } ;
-
-        mkN = overload {
-            mkN : Str -> Noun = regN ;
-            mkN : Str -> Str -> Noun = worstN 
-        } ;
+            a = SVA III Pl } ;
 
 }
