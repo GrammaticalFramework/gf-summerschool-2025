@@ -22,12 +22,19 @@ concrete AppEng of App = open MicroLangEng, MicroResEng in {
         -- : JobStatus ;
         Lecturer = works_as_a_N_VP lecturer_N ;
         Professor = works_as_a_N_VP professor_N ;
-        -- Student,
+        Student = is_a_N_VP student_N ;
+
         -- BetweenJobs,
         Retired = UseComp (CompAP retired_A) ;
 
     oper
       retired_A = {s = "retired"} ;
+
+      is_a_N_VP : N -> VP ;
+      is_a_N_VP job =
+        let job_CN   = UseN job ;
+            a_job_NP = DetCN a_Det job_CN ;
+        in UseComp (CompNP a_job_NP) ;
 
       works_as_a_N_VP : N -> VP ;
       works_as_a_N_VP job =
@@ -37,6 +44,7 @@ concrete AppEng of App = open MicroLangEng, MicroResEng in {
 
 
       work_V = MicroResEng.mkV "work" ;
+      student_N = MicroResEng.mkN "student" ;
       lecturer_N = MicroResEng.mkN "lecturer" ;
       professor_N = MicroResEng.mkN "professor" ;
 
