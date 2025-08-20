@@ -12,23 +12,28 @@ concrete AppEng of App = open MicroLangEng, MicroResEng in {
         SJobStatus person jobstatus = PredVPS person jobstatus ;
 
         --  : Person ;
-        -- Inari,
-        -- Aarne,
-        -- Hans,
+        Inari = UsePN {s = "Inari"} ;
+        Aarne = UsePN {s = "Aarne"} ;
+        Hans = UsePN {s = "Hans"} ;
         You = UsePron youSg_Pron ;
         I = UsePron i_Pron ;
         She = UsePron she_Pron ;
 
         -- : JobStatus ;
-        Lecturer = works_as_a_N_VP lecturer_N ;
+        Lecturer =
+           works_as_a_N_VP lecturer_N
+         | is_a_N_VP lecturer_N ;
         Professor = works_as_a_N_VP professor_N ;
         Student = is_a_N_VP student_N ;
 
-        -- BetweenJobs,
+        BetweenJobs = is_Adv (PrepNP between_Prep (DetCN aPl_Det (UseN job_N))) ;
         Retired = UseComp (CompAP retired_A) ;
 
     oper
       retired_A = {s = "retired"} ;
+
+      is_Adv : Adv -> VP ;
+      is_Adv adv = UseComp (CompAdv adv) ;
 
       is_a_N_VP : N -> VP ;
       is_a_N_VP job =
@@ -47,6 +52,8 @@ concrete AppEng of App = open MicroLangEng, MicroResEng in {
       student_N = MicroResEng.mkN "student" ;
       lecturer_N = MicroResEng.mkN "lecturer" ;
       professor_N = MicroResEng.mkN "professor" ;
+      job_N = MicroResEng.mkN "job" ;
 
       as_Prep = {s = "as"} ;
+      between_Prep = {s = "between"} ;
 }
