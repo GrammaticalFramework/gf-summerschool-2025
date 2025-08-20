@@ -7,7 +7,9 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
         Pron, NP = NounPhr ;
         V = Verb ;
         V2 = Verb ;
-        VP = {s: SVAgr => Str} ;
+        VP = {verb : SVAgr => Str ;
+              compl : Str -- NB. wouldn't work for reflexive pronouns
+              } ;
 
     lin
         UseN n = n ;
@@ -23,23 +25,26 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
             a = SVA III det.n
         } ;
         UseV v = {
-            s = table {
+            verb = table {
                 (SVA III Sg) => v.s ! PresIIISg ;
                 _ => v.s ! Inf
-            }
+            } ;
+            compl = ""
         } ;
         ComplV2 v2 np = {
-            s = let obj = np.s ! Acc in table {
-                (SVA III Sg) => v2.s ! PresIIISg ++ obj ;
-                _ => v2.s ! Inf ++ obj
-            }
+            verb = table {
+                (SVA III Sg) => v2.s ! PresIIISg ;
+                _ => v2.s ! Inf
+            } ;
+            compl = np.s ! Acc ;
         } ;
         UseComp ap = {
-            s = table {
-                (SVA I Sg) => "am" ++ ap.s ;
-                (SVA III Sg) => "is" ++ ap.s ;
-                _ => "are" ++ ap.s
-            }
+            verb = table {
+                (SVA I Sg) => "am" ;
+                (SVA III Sg) => "is" ;
+                _ => "are"
+            } ;
+            compl = ap.s
         } ;
         CompAP ap = ap ;
         --    : NP -> Comp ;            -- a student
@@ -48,12 +53,14 @@ concrete MicroLangEng of MicroLang = open MicroResEng in {
         CompAdv adv = adv ;
 
         PredVPS np vp = {
-            s = np.s ! Nom ++ vp.s ! np.a
+            s = np.s ! Nom ++ vp.verb ! np.a ++ vp.compl
         } ;
         UttNP np = {s = np.s ! Nom} ;
         UttS s = s ;
-        AdvVP vp adv = {s= \\sva => vp.s ! sva ++ adv.s } ;
-        PrepNP p np = { s = p.s ++ np.s ! Acc } ;
+        AdvVP vp adv = vp ** {
+            compl = vp.compl ++ adv.s
+            } ;
+        PrepNP p np = { s = p.s ++ np.s ! Acc} ;
 
         in_Prep = {s = "in"} ;
         on_Prep = {s = "on"} ;
