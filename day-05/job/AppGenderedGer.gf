@@ -35,15 +35,15 @@ concrete AppGenderedGer of App = open SyntaxGer, ParadigmsGer in {
         LinJobStatus : Type = {vp : HumanGender => Comp} ;
         mkJobStatus : (m,f,n,unk : N) -> LinJobStatus = \m,f,n,unk ->
           {vp = table {
-	     SomeGender Fem => mkComp (mkNP aPl_Det f) ;
-	     SomeGender Masc => mkComp (mkNP aPl_Det m);
-	     SomeGender Neutr => mkComp (mkNP aPl_Det n);
-	     NoGender => mkComp (mkNP aPl_Det unk)}} ;
+	     SomeGender Fem => CompCN (mkCN f) ;
+	     SomeGender Masc => CompCN (mkCN m);
+	     SomeGender Neutr => CompCN (mkCN n);
+	     NoGender => CompCN (mkCN unk)}} ;
 
         smartJobStatus : Str -> JobStatus = \student ->
-          let fem_N : N  = mkN (student + "in") (student + "innen") feminine ;
-              masc_N : N = mkN student          (student + "en") masculine ;
-	      neutr_N : N = mkN (student + "y") (student + "ys") neuter ;
+          let fem_N : N  = mkN (student + "in")  (student + "innen")  feminine ;
+              masc_N : N = mkN student           (student + "en")     masculine ;
+	          neutr_N : N = mkN (student + "y")  (student + "ys")     neuter ;
               unk_N : N  = mkN (student + "*in") (student + "*innen") feminine ;
            in mkJobStatus masc_N fem_N neutr_N unk_N ;
 
