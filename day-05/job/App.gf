@@ -12,7 +12,7 @@ abstract App = {
         Inari,
         Aarne,
         Hans,
-        You, I, She : Person ;
+        You, I, She, They : Person ;
 
         Lecturer,
         Professor,
