@@ -2,7 +2,9 @@
 
 We did:
 - Finish the MicroLang from [day 2](../day-02/)
-- Clarify some foundational concepts in GF, such as module structure and tables vs. records. See a written recap [here](https://harisont.github.io/lists/facs.html).
+- Clarify some foundational concepts in GF, such as module structure and tables vs. records.
+   - [Original slides](https://docs.google.com/presentation/d/1mjl_8-guV7c2aMJJSNWMfSw7XCYow5DW4cGZUJaiw9Q/edit?usp=sharing) (Inari)
+   - [Written recap](https://harisont.github.io/lists/facs.html) (Arianna)
 - Application grammar for people's job status [App.gf](App.gf) & [AppEng.gf](AppEng.gf), which uses the MicroLang as a library.
 
 Example output from the application grammar:
