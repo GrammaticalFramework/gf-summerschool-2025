@@ -19,7 +19,20 @@ main = do
 
 
 transfer :: Tree a -> Tree a
-transfer tree = case tree of
-  LexN "cat_N" -> LexN "dog_N"
-  _ -> composOp transfer tree
+transfer =
+  transferPron .
+  transferPassive
+
+
+transferPron :: Tree a -> Tree a
+transferPron tree = case tree of
+  Ghe_Pron -> Gthey_Pron
+  Gshe_Pron -> Gthey_Pron
+  _ -> composOp transferPron tree
+  
+transferPassive :: Tree a -> Tree a
+transferPassive tree = case tree of
+  GPredVP subject (GComplSlash (GSlashV2a verb) object) ->
+    GPredVP object (GAdvVP (GPassV2 verb) (GPrepNP Gby8agent_Prep subject))
+  _ -> composOp transferPassive tree
 
