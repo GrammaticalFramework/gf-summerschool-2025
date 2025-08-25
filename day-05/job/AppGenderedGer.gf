@@ -1,4 +1,4 @@
-concrete AppGenderedGer of App = open SyntaxGer, ParadigmsGer in {
+concrete AppGenderedGer of App = open SyntaxGer, ParadigmsGer, VerbGer in {
     lincat
         Statement = S ;
         JobStatus = LinJobStatus ;
